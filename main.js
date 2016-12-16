@@ -30,5 +30,12 @@ module.exports.loop = function () {
       //creep.say("I'm a builder!");
       roleBuilder.run(creep);
     }
+
+    //Look for dead creeps and remove from memory
+    for(var i in Memory.creeps) {
+      if(!Game.creeps[i]) {
+        delete Memory.creeps[i];
+      }
+    }
   }
 }
