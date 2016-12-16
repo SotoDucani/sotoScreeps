@@ -23,7 +23,7 @@ var roleBuilder = {
       }
   	}
     //If creep needs to gather energy
-    else if (creep.memory.working == false) {
+    else if (creep.memory.building == false) {
       //creep.say("Harvesting!");
       var source = creep.pos.findClosestByPath(FIND_SOURCES);
       if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
