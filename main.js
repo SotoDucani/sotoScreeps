@@ -7,15 +7,18 @@ module.exports.loop = function () {
   var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
   var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
 
+  //Spawn creeps in order
   if(harvesters.length < 4) {
     var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'harvester', working: false});
   }
-  else if(upgraders.length < 2) {
+  else if(upgraders.length < 4) {
     var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'upgrader', upgrading: false});
   }
   //if(builders.length < 2) {
     //var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'builder'});
   //}
+
+  //Make Creeps perform their roles
   for(var name in Game.creeps) {
     var creep = Game.creeps[name];
     if(creep.memory.role == 'harvester') {
