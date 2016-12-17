@@ -17,11 +17,12 @@ var roleBuilder = {
   	  var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
       if(targets.length > 0) {
         //creep.say("Building!");
+        creep.memory.target = targets[0];
         if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
           creep.moveTo(targets[0]);
         }
       }
-      //Find Ramparts under 1000 hits
+      //Find Ramparts under 2000 hits
       else if(targets.length == 0) {
         var targets = creep.room.find(FIND_STRUCTURES, {
           filter: (structure) => {
@@ -31,12 +32,13 @@ var roleBuilder = {
         });
         if (targets.length > 0) {
           //creep.say("Repairing Ramparts");
+          creep.memory.target = targets[0];
           if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
             creep.moveTo(targets);
           }
         }
       }
-      //Find Walls under 1000 hits
+      //Find Walls under 2000 hits
       else if(targets.length == 0) {
         var targets = creep.room.find(FIND_STRUCTURES, {
           filter: (structure) => {
@@ -46,6 +48,7 @@ var roleBuilder = {
         });
         if (targets.length > 0) {
           //creep.say("Repairing Walls");
+          creep.memory.target = targets[0];
           if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
             creep.moveTo(targets);
           }
@@ -54,13 +57,14 @@ var roleBuilder = {
   	}
     //If creep needs to gather energy
     else if (creep.memory.building == false) {
-      //creep.say("Withdrawing energy!");
       var withdrawTargets = creep.room.find(FIND_STRUCTURES, {
         filter: (structure) => {
           return (structure.structureType == STRUCTURE_CONTAINER ||
             structure.structureType == STRUCTURE_STORAGE) && structure.store[RESOURCE_ENERGY] > 100;
         }
       });
+      //creep.say("Withdrawing energy!");
+      creep.memory.target = withdrawTargets[0];
       if (creep.withdraw(withdrawTargets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
         creep.moveTo(withdrawTargets[0]);
       }
