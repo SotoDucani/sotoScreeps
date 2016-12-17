@@ -13,45 +13,28 @@ var roleMover = {
 
     //If Creep has energy to move
     if (creep.memory.moving == true) {
-      var target = null;
-      //Look for spawns that need energy
-      if(!target) {
-        var spawnTarget = creep.pos.findClosestByPath(Game.spawns, {
-          filter: function (spawner) {
-            return spawner.energy < spawner.energyCapacity;
-          }
-        });
-        if (spawnTarget) {
-          target = spawnTarget;
+      var targets = creep.room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+          return (structure.structureType == STRUCTURE_EXTENSION ||
+            structure.structureType == STRUCTURE_SPAWN) &&
+            structure.energy < structure.energyCapacity;
         }
-      }
-      //Look for extensions that need energy
-      else if(!target) {
-        var expanderTarget = creep.pos.findClosestByPath(Game.structures, {
-          filter: function(structure) {
-            return structure.structureType == 'STRUCTURE_EXTENSION' && structure.energy < structure.energyCapacity;
-          }
-        });
-        if (expanderTarget) {
-          target = expanderTarget;
-        }
-      }
-      //If you have a target
-      if(target) {
-        if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-          creep.moveTo(target);
+      });
+      if(targets.length > 0) {
+        if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+          creep.moveTo(targets[0]);
         }
       }
     }
 
     //If the creep has no energy to move, get some from a container
     else if (creep.memory.moving == false) {
-      var withdrawTarget = creep.pos.findClosestByPath(Game.structures, {
+      var withdrawTarget = creep.pos.findClosestByPath(FIND_STRUCTURES{
         filter: function(structure) {
-          return structure.structureType == 'STRUCTURE_CONTAINER' && structure.energy >= creep.carryCapacity;
+          return structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] >= creep.carryCapacity;
         }
       });
-      if (withdrawTarget) {
+      if (withdrawTarget.length > 0) {
         if (creep.withdraw(withdrawTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
           creep.moveTo(withdrawTarget);
         }
