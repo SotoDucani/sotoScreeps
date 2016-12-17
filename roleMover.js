@@ -56,7 +56,7 @@ var roleMover = {
     }
 
     //If the creep has no energy to move, get some from a container if there is a need
-    else if (creep.memory.moving == false and futureTargets == 0) {
+    else if (creep.memory.moving == false && futureTargets == 0) {
       var withdrawTarget = creep.room.find(FIND_STRUCTURES, {
         filter: function(structure) {
           return structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] >= creep.carryCapacity;
