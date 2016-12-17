@@ -14,7 +14,11 @@ var roleRepairer = {
   	}
     //If creep needs to use energy to repair structures
   	if(creep.memory.repairing == true) {
-  	  var targets = creep.room.find(FIND_STRUCTURES);
+  	  var targets = creep.room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+          return structure.hits < structure.hitsMax;
+        }
+      });
       if(targets.length > 0) {
         //creep.say("Repairing!");
         creep.memory.target = targets[0];
@@ -28,7 +32,8 @@ var roleRepairer = {
       var withdrawTargets = creep.room.find(FIND_STRUCTURES, {
         filter: (structure) => {
           return (structure.structureType == STRUCTURE_CONTAINER ||
-            structure.structureType == STRUCTURE_STORAGE) && structure.store[RESOURCE_ENERGY] > 100;
+            structure.structureType == STRUCTURE_STORAGE) &&
+            structure.store[RESOURCE_ENERGY] > 100;
         }
       });
       //creep.say("Withdrawing energy!");
