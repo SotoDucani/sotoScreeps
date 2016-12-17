@@ -16,7 +16,7 @@ var roleRepairer = {
   	if(creep.memory.repairing == true) {
   	  var targets = creep.room.find(FIND_STRUCTURES, {
         filter: (structure) => {
-          for(potential in targets) {
+          for(potential in structure) {
             if ((potential.structureType == STRUCTURE_WALL || potential.structureType == STRUCTURE_RAMPART) && potential.hits < 10000) {
                 return potential;
               }
