@@ -14,16 +14,30 @@ var roleHarvester = {
     }
     //If creep needs to transfer energy to containers
     if (creep.memory.working == true) {
-      var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+      var targets = creep.pos.findClosestByRange(FIND_STRUCTURES, {
         filter: (structure) => {
           return structure.structureType == STRUCTURE_SPAWN && structure.energy < structure.energyCapacity;
         }
       });
-      if(target) {
-        //creep.say("Working!");
-        creep.memory.target = target;
-        if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-          creep.moveTo(target);
+      if(targets.length > 0) {
+        //creep.say("Building!");
+        creep.memory.target = targets[0];
+        if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
+          creep.moveTo(targets[0]);
+        }
+      }
+      else if {
+        var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+          filter: (structure) => {
+            return structure.structureType == STRUCTURE_SPAWN && structure.energy < structure.energyCapacity;
+          }
+        });
+        if(target) {
+          //creep.say("Working!");
+          creep.memory.target = target;
+          if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(target);
+          }
         }
       }
       else if (!target) {
