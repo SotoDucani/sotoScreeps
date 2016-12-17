@@ -13,14 +13,14 @@ module.exports.loop = function () {
 
   //Spawn creeps in order
   if(harvesters.length < 5) {
-    var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'harvester', working: false, target: ""});
+    var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,WORK,MOVE], undefined, {role: 'harvester', working: false, target: ""});
   }
-  //else if(upgraders.length < 4) {
-  //  var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'upgrader', upgrading: false, target: ""});
-  //}
-  //else if(movers.length < 2) {
-  //  var newName = Game.spawns['Spawn1'].createCreep([CARRY,CARRY,MOVE,MOVE], undefined, {role: 'mover', moving: false, target: ""});
-  //}
+  else if(upgraders.length < 1) {
+    var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'upgrader', upgrading: false, target: ""});
+  }
+  else if(movers.length < 1) {
+    var newName = Game.spawns['Spawn1'].createCreep([CARRY,CARRY,MOVE,MOVE], undefined, {role: 'mover', moving: false, target: ""});
+  }
   else if(builders.length < 4) {
     var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'builder', building: false, target: ""});
   }
@@ -35,10 +35,10 @@ module.exports.loop = function () {
       //creep.say("I'm a harvester!");
       roleHarvester.run(creep);
     }
-    //else if(creep.memory.role == 'upgrader') {
-    //  //creep.say("I'm a upgrader!");
-    //  roleUpgrader.run(creep);
-    //}
+    else if(creep.memory.role == 'upgrader') {
+      //creep.say("I'm a upgrader!");
+      roleUpgrader.run(creep);
+    }
     else if(creep.memory.role == 'builder') {
       //creep.say("I'm a builder!");
       roleBuilder.run(creep);
@@ -47,10 +47,10 @@ module.exports.loop = function () {
     //  //creep.say("I'm a repairer!");
     //  roleRepairer.run(creep);
     //}
-    //else if(creep.memory.role == 'mover') {
-    //  //creep.say("I'm a mover!");
-    //  roleMover.run(creep);
-    //}
+    else if(creep.memory.role == 'mover') {
+      //creep.say("I'm a mover!");
+      roleMover.run(creep);
+    }
 
     //Look for dead creeps and remove from memory
     for(var i in Memory.creeps) {
