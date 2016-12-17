@@ -22,7 +22,7 @@ var roleHarvester = {
         var container;
         for (container in containerArray) {
           console.log(container);
-          if (container.store < container.storeCapacity) {
+          if (container.energy < container.energyCapacity) {
             if (creep.transfer(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
               creep.moveTo(container);
             }
