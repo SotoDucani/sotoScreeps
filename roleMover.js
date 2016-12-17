@@ -40,7 +40,7 @@ var roleMover = {
             return structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] < structure.storeCapacity;
           }
         });
-        if (targets.length < 0) {
+        if (targets.length > 0) {
           creep.memory.target = targets[0];
           if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             creep.moveTo(targets[0]);
