@@ -15,6 +15,7 @@ var roleUpgrader = {
     //If creep needs to use energy to upgrade the controller
 	  if(creep.memory.upgrading == true) {
       //creep.say("Upgrading!");
+      creep.memory.target = creep.room.controller;
       if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
         creep.moveTo(creep.room.controller);
       }
@@ -28,8 +29,15 @@ var roleUpgrader = {
             structure.structureType == STRUCTURE_STORAGE) && structure.store[RESOURCE_ENERGY] > 100;
         }
       });
-      if (creep.withdraw(withdrawTargets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(withdrawTargets[0]);
+      if (withdrawTargets.length > 0) {
+        creep.memory.target = withdrawTargets[0];
+        if (creep.withdraw(withdrawTargets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+          creep.moveTo(withdrawTargets[0]);
+        }
+      }
+      else {
+        creep.memory.target = Game.flags.Upgraders;
+        creep.moveTo(Game.flags.Upgraders);
       }
     }
 	}

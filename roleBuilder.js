@@ -54,6 +54,10 @@ var roleBuilder = {
           }
         }
       }
+      else {
+        creep.memory.target = Game.flags.Builders;
+        creep.moveTo(Game.flags.Builders);
+      }
   	}
     //If creep needs to gather energy
     else if (creep.memory.building == false) {
@@ -69,6 +73,7 @@ var roleBuilder = {
         creep.moveTo(withdrawTargets[0]);
       }
       else {
+        creep.memory.target = Game.flags.Builders;
         creep.moveTo(Game.flags.Builders);
       }
     }
