@@ -14,31 +14,12 @@ var roleHarvester = {
     }
     //If creep needs to transfer energy to Towers or containers
     if (creep.memory.working == true) {
-      var targets = creep.room.find(FIND_STRUCTURES, {
-        filter: (structure) => {
-          return structure.structureType == STRUCTURE_TOWER && structure.energy < structure.energyCapacity;
-          }
-        });
+      var targets = creep.pos.findNearest(STRUCTURE_CONTAINER);
       if(targets.length > 0) {
         //creep.say("Working!");
         creep.memory.target = targets[0];
         if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
           creep.moveTo(targets[0]);
-        }
-      }
-      else if (targets.length == 0) {
-        var targets = creep.room.find(FIND_STRUCTURES, {
-          filter: (structure) => {
-            return (structure.structureType == STRUCTURE_CONTAINER ||
-              structure.structureType == STRUCTURE_STORAGE) && structure.store[RESOURCE_ENERGY] < structure.storeCapacity;
-          }
-        });
-        if(targets.length > 0) {
-          //creep.say("Working!");
-          creep.memory.target = targets[0];
-          if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            creep.moveTo(targets[0]);
-          }
         }
       }
     }
