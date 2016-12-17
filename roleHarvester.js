@@ -28,15 +28,15 @@ var roleHarvester = {
         }
       }
       else if (targets.length == 0) {
-        var altTargets = creep.room.find(FIND_STRUCTURES, {
+        var targets = creep.room.find(FIND_STRUCTURES, {
           filter: (structure) => {
             return (structure.structureType == STRUCTURE_CONTAINER ||
               structure.structureType == STRUCTURE_STORAGE) && structure.store[RESOURCE_ENERGY] < structure.storeCapacity;
           }
         });
-        if(altTargets.length > 0) {
-          if(creep.transfer(altTargets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            creep.moveTo(altTargets[0]);
+        if(targets.length > 0) {
+          if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(targets[0]);
           }
         }
       }
