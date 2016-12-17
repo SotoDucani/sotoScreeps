@@ -40,6 +40,7 @@ module.exports.loop = function () {
     }
     else if(creep.memory.role == 'mover') {
       //creep.say("I'm a mover!");
+      roleMover.run(creep);
     }
 
     //Look for dead creeps and remove from memory

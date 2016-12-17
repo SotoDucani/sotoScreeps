@@ -1,5 +1,6 @@
 var roleMover = {
   run: function(creep) {
+
     //If energy is zero, go get energy
     if(creep.memory.moving == true && creep.carry.energy == 0) {
       creep.memory.moving = false;
@@ -9,10 +10,10 @@ var roleMover = {
       creep.memory.moving = true;
       //creep.say("Moving the energy");
     }
+
     //If Creep has energy to move
     if (creep.memory.moving == true) {
       var target = null;
-
       //Look for spawns that need energy
       if(!target) {
         var spawnTarget = creep.pos.findClosestByPath(Game.spawns, {
@@ -42,6 +43,7 @@ var roleMover = {
         }
       }
     }
+
     //If the creep has no energy to move, get some from a container
     else if (creep.memory.moving == false) {
       var withdrawTarget = creep.pos.findClosestByPath(Game.structures, {
