@@ -37,8 +37,8 @@ var roleMover = {
         }
       });
       if (withdrawTarget.length > 0) {
-        if (creep.withdraw(withdrawTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-          creep.moveTo(withdrawTarget);
+        if (creep.withdraw(withdrawTarget[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+          creep.moveTo(withdrawTarget[0]);
         }
       }
     }
