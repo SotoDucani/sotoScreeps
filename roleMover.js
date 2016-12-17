@@ -68,7 +68,23 @@ var roleMover = {
         }
       }
       else {
-        creep.moveTo(Game.flags.Movers);
+        var targets = creep.room.find(FIND_STRUCTURES, {
+          filter: function(structure) {
+            return structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] < structure.storeCapacity;
+          }
+        });
+        if (targets.length > 0) {
+          creep.memory.target = targets[0];
+          if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(targets[0]);
+          }
+          creep.memory.target = Game.flags.Movers;
+          creep.moveTo(Game.flags.Movers);
+        }
+        else {
+          creep.memory.target = Game.flags.Movers;
+          creep.moveTo(Game.flags.Movers);
+        }
       }
     }
   }
