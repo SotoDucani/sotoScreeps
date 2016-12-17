@@ -35,22 +35,22 @@ module.exports.loop = function () {
       //creep.say("I'm a harvester!");
       roleHarvester.run(creep);
     }
-    else if(creep.memory.role == 'upgrader') {
-      //creep.say("I'm a upgrader!");
-      roleUpgrader.run(creep);
-    }
+    //else if(creep.memory.role == 'upgrader') {
+    //  //creep.say("I'm a upgrader!");
+    //  roleUpgrader.run(creep);
+    //}
     else if(creep.memory.role == 'builder') {
       //creep.say("I'm a builder!");
       roleBuilder.run(creep);
     }
-    else if(creep.memory.role == 'repairer') {
-      //creep.say("I'm a repairer!");
-      roleRepairer.run(creep);
-    }
-    else if(creep.memory.role == 'mover') {
-      //creep.say("I'm a mover!");
-      roleMover.run(creep);
-    }
+    //else if(creep.memory.role == 'repairer') {
+    //  //creep.say("I'm a repairer!");
+    //  roleRepairer.run(creep);
+    //}
+    //else if(creep.memory.role == 'mover') {
+    //  //creep.say("I'm a mover!");
+    //  roleMover.run(creep);
+    //}
 
     //Look for dead creeps and remove from memory
     for(var i in Memory.creeps) {
