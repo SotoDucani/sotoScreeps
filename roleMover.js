@@ -2,13 +2,6 @@ var roleMover = {
 
   /** @param {Creep} creep **/
   run: function(creep) {
-    var futureTargets = creep.room.find(FIND_STRUCTURES, {
-      filter: (structure) => {
-        return (structure.structureType == STRUCTURE_EXTENSION ||
-          structure.structureType == STRUCTURE_SPAWN) &&
-          structure.energy < structure.energyCapacity;
-      }
-    });
     //If energy is zero, go get energy
     if(creep.memory.moving == true && creep.carry.energy == 0) {
       creep.memory.moving = false;
@@ -41,7 +34,7 @@ var roleMover = {
     }
 
     //If the creep has no energy to move, get some from a container if there is a need
-    else if (creep.memory.moving == false && futureTargets == 0) {
+    else if (creep.memory.moving == false) {
       var withdrawTarget = creep.room.find(FIND_STRUCTURES, {
         filter: function(structure) {
           return structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] >= creep.carryCapacity;
