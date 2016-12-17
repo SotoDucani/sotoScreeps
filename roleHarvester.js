@@ -14,7 +14,7 @@ var roleHarvester = {
     }
     //If creep needs to transfer energy to Towers or containers
     if (creep.memory.working == true) {
-      var targets = creep.pos.findNearest(STRUCTURE_CONTAINER);
+      var targets = creep.pos.findClosestByRange(STRUCTURE_CONTAINER);
       if(targets.length > 0) {
         //creep.say("Working!");
         creep.memory.target = targets[0];
