@@ -21,29 +21,31 @@ var roleBuilder = {
           creep.moveTo(targets[0]);
         }
       }
-      //Find Ramparts under 1000
+      //Find Ramparts under 1000 hits
       else if(targets.length == 0) {
         var targets = creep.room.find(FIND_STRUCTURES, {
           filter: (structure) => {
             return structure.structureType == STRUCTURE_RAMPART &&
-              structure.hits < 1000;
+              structure.hits < 2000;
           }
         });
         if (targets.length > 0) {
+          //creep.say("Repairing Ramparts");
           if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
             creep.moveTo(targets);
           }
         }
       }
-      //Find Walls under 1000
+      //Find Walls under 1000 hits
       else if(targets.length == 0) {
         var targets = creep.room.find(FIND_STRUCTURES, {
           filter: (structure) => {
             return structure.structureType == STRUCTURE_WALL &&
-              structure.hits < 1000;
+              structure.hits < 2000;
           }
         });
         if (targets.length > 0) {
+          //creep.say("Repairing Walls");
           if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
             creep.moveTo(targets);
           }
