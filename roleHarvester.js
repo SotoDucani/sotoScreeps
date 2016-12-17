@@ -14,7 +14,6 @@ var roleHarvester = {
     }
     //If creep needs to transfer energy to spawn
     if (creep.memory.working == true) {
-      //creep.say("Working!");
       var targets = creep.room.find(FIND_STRUCTURES, {
         filter: (structure) => {
           return (structure.structureType == STRUCTURE_EXTENSION ||
@@ -23,6 +22,8 @@ var roleHarvester = {
           }
         });
       if(targets.length > 0) {
+        //creep.say("Working!");
+        creep.memory.target = targets[0];
         if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
           creep.moveTo(targets[0]);
         }
@@ -35,6 +36,8 @@ var roleHarvester = {
           }
         });
         if(targets.length > 0) {
+          //creep.say("Working!");
+          creep.memory.target = targets[0];
           if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             creep.moveTo(targets[0]);
           }
@@ -43,8 +46,9 @@ var roleHarvester = {
     }
     //If creep needs to gather energy from a source
     else if (creep.memory.working == false) {
-      //creep.say("Harvesting!");
       var source = creep.pos.findClosestByPath(FIND_SOURCES);
+      //creep.say("Harvesting!");
+      creep.memory.target = source;
       if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
         creep.moveTo(source);
       }
