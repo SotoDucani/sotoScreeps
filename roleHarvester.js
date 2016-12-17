@@ -16,7 +16,7 @@ var roleHarvester = {
     if (creep.memory.working == true) {
       var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
         filter: (structure) => {
-          return structure.structureType == STRUCTURE_SPAWN && structure.energy < structure.energyCapacity;
+          return structure.structureType == STRUCTURE_CONTAINER;
         }
       });
       if(target) {
@@ -24,20 +24,6 @@ var roleHarvester = {
         creep.memory.target = target;
         if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
           creep.moveTo(target);
-        }
-      }
-      else if (!target) {
-        var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-          filter: (structure) => {
-            return structure.structureType == STRUCTURE_CONTAINER;
-          }
-        });
-        if(target) {
-          //creep.say("Working!");
-          creep.memory.target = target;
-          if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            creep.moveTo(target);
-          }
         }
       }
     }
