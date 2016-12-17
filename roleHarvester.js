@@ -16,16 +16,16 @@ var roleHarvester = {
     if (creep.memory.working == true) {
       //creep.say("Working!");
       if (Game.spawns.Spawn1.energy == Game.spawns.Spawn1.energyCapacity) {
-        var containerTarget = creep.room.find(FIND_MY_STRUCTURES, {
-          filter: {structureType: STRUCTURE_CONTAINER}
-        });
-        if (containerTarget.energy < containerTarget.energyCapacity) {
-          if (creep.transfer(containerTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            creep.moveTo(containerTarget);
+        var containerTarget = creep.pos.findClosestByPath(Game.structures, {
+          filter: function (structure) {
+            return structure.structureType == 'STRUCTURE_CONTAINER' && structure.energy < structure.energyCapacity;
           }
+        });
+        if (creep.transfer(containerTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+          creep.moveTo(containerTarget);
         }
       }
-      else if (creep.transfer(Game.spawns.Spawn1, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+      if (creep.transfer(Game.spawns.Spawn1, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
         creep.moveTo(Game.spawns.Spawn1);
       }
     }
