@@ -24,7 +24,7 @@ module.exports.loop = function () {
   else if(builders.length < 6) {
     var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'builder', building: false, target: ""});
   }
-  else if(repairers.length < 6) {
+  else if(repairers.length < 2) {
     var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'repairer', repairing: false, target: ""});
   }
 
