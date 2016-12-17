@@ -42,7 +42,7 @@ var roleMover = {
         }
       }
       else {
-        creep.move(Game.flags.Flag1);
+        creep.moveTo(Game.flags.Flag1);
       }
     }
   }
