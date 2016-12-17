@@ -12,13 +12,11 @@ var roleHarvester = {
       creep.memory.working = true;
       //creep.say("Swap to working!");
     }
-    //If creep needs to transfer energy to spawn
+    //If creep needs to transfer energy to Towers or containers
     if (creep.memory.working == true) {
       var targets = creep.room.find(FIND_STRUCTURES, {
         filter: (structure) => {
-          return (structure.structureType == STRUCTURE_EXTENSION ||
-            structure.structureType == STRUCTURE_SPAWN ||
-            structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
+          return (structure.structureType == STRUCTURE_TOWER && structure.energy < structure.energyCapacity;
           }
         });
       if(targets.length > 0) {
