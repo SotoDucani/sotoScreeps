@@ -41,6 +41,9 @@ var roleMover = {
           creep.moveTo(withdrawTarget[0]);
         }
       }
+      else {
+        creep.move(Game.flags.Flag1);
+      }
     }
   }
 }
