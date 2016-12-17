@@ -1,4 +1,6 @@
 var roleMover = {
+  
+  /** @param {Creep} creep **/
   run: function(creep) {
 
     //If energy is zero, go get energy
