@@ -34,7 +34,7 @@ var roleBuilder = {
           //creep.say("Repairing Ramparts");
           creep.memory.target = targets[0];
           if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
-            creep.moveTo(targets);
+            creep.moveTo(targets[0]);
           }
         }
       }
@@ -50,7 +50,7 @@ var roleBuilder = {
           //creep.say("Repairing Walls");
           creep.memory.target = targets[0];
           if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
-            creep.moveTo(targets);
+            creep.moveTo(targets[0]);
           }
         }
       }
