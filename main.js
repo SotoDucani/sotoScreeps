@@ -10,13 +10,13 @@ module.exports.loop = function () {
   //var movers = _.filter(Game.creeps, (creep) => creep.memory.role == 'mover');
 
   //Spawn creeps in order
-  if(harvesters.length < 4) {
+  if(harvesters.length < 6) {
     var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'harvester', working: false});
   }
   else if(upgraders.length < 4) {
     var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'upgrader', upgrading: false});
   }
-  else if(builders.length < 4) {
+  else if(builders.length < 6) {
     var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'builder', building: false});
   }
   //else if(movers.length < 2) {
