@@ -68,6 +68,9 @@ var roleBuilder = {
       if (creep.withdraw(withdrawTargets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
         creep.moveTo(withdrawTargets[0]);
       }
+      else {
+        creep.moveTo(Game.flags.Builders);
+      }
     }
 	}
 };
