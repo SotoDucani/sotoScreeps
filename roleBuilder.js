@@ -24,10 +24,15 @@ var roleBuilder = {
   	}
     //If creep needs to gather energy
     else if (creep.memory.building == false) {
-      //creep.say("Harvesting!");
-      var source = creep.pos.findClosestByPath(FIND_SOURCES);
-      if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(source);
+      //creep.say("Withdrawing energy!");
+      var withdrawTargets = creep.room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+          return (structure.structureType == STRUCTURE_CONTAINER ||
+            structure.structureType == STRUCTURE_STORAGE) && structure.store[RESOURCE_ENERGY] > 100;
+        }
+      });
+      if (creep.withdraw(withdrawTargets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+        creep.moveTo(withdrawTargets[0]);
       }
     }
 	}
