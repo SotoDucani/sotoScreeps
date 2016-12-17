@@ -36,6 +36,10 @@ var roleRepairer = {
           creep.moveTo(targets[0]);
         }
       }
+      else {
+        creep.memory.target = Game.flags.Repairers;
+        creep.moveTo(Game.flags.Repairers);
+      }
     }
     //If creep needs to gather energy
     else if (creep.memory.repairing == false) {
@@ -46,10 +50,16 @@ var roleRepairer = {
             structure.store[RESOURCE_ENERGY] > 100;
         }
       });
-      //creep.say("Withdrawing energy!");
-      creep.memory.target = withdrawTargets[0];
-      if (creep.withdraw(withdrawTargets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(withdrawTargets[0]);
+      if (withdrawTargets.length > 0) {
+        //creep.say("Withdrawing energy!");
+        creep.memory.target = withdrawTargets[0];
+        if (creep.withdraw(withdrawTargets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+          creep.moveTo(withdrawTargets[0]);
+        }
+      }
+      else {
+        creep.memory.target = Game.flags.Repairers;
+        creep.moveTo(Game.flags.Repairers);
       }
     }
   }
