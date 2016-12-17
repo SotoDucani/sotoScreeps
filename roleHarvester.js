@@ -16,7 +16,7 @@ var roleHarvester = {
     if (creep.memory.working == true) {
       //creep.say("Working!");
       if (Game.spawns.Spawn1.energy == Game.spawns.Spawn1.energyCapacity) {
-        var containerArray = creep.room.find(FIND_STRUCTURES, {
+        var containerArray = creep.room.find(FIND_MY_STRUCTURES, {
           filter: {structureType: STRUCTURE_CONTAINER}
         });
         var container;
