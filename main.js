@@ -12,7 +12,7 @@ module.exports.loop = function () {
   var movers = _.filter(Game.creeps, (creep) => creep.memory.role == 'mover');
 
   //Spawn creeps in order
-  if(harvesters.length < 5) {
+  if(harvesters.length < 4) {
     var newName = Game.spawns['Spawn1'].createCreep([WORK,WORK,WORK,WORK,CARRY,MOVE,MOVE], undefined, {role: 'harvester', working: false, target: ""});
   }
   else if(upgraders.length < 4) {
