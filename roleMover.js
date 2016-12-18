@@ -21,7 +21,7 @@ var roleMover = {
             structure.energy < structure.energyCapacity;
         }
       });
-      if(target.length) {
+      if(target) {
         if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
           creep.moveTo(targets);
         }
