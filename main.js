@@ -15,16 +15,16 @@ module.exports.loop = function () {
   if(harvesters.length < 5) {
     var newName = Game.spawns['Spawn1'].createCreep([WORK,WORK,WORK,WORK,CARRY,MOVE,MOVE], undefined, {role: 'harvester', working: false, target: ""});
   }
-  else if(upgraders.length < 2) {
+  else if(upgraders.length < 4) {
     var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'upgrader', upgrading: false, target: ""});
   }
-  else if(movers.length < 2) {
+  else if(movers.length < 4) {
     var newName = Game.spawns['Spawn1'].createCreep([CARRY,CARRY,MOVE,MOVE], undefined, {role: 'mover', moving: false, target: ""});
   }
   else if(builders.length < 4) {
     var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'builder', building: false, target: ""});
   }
-  else if(repairers.length < 2) {
+  else if(repairers.length < 4) {
     var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'repairer', repairing: false, target: ""});
   }
 
