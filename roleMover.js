@@ -23,7 +23,7 @@ var roleMover = {
       });
       if(target) {
         if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-          creep.moveTo(targets);
+          creep.moveTo(target);
         }
       }
       //Can't find targets, but have energy
