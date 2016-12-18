@@ -14,43 +14,43 @@ var roleRepairer = {
   	}
     //If creep needs to use energy to repair structures
   	if(creep.memory.repairing == true) {
-  	  var targets = creep.room.find(FIND_STRUCTURES, {
+  	  var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
         filter: (structure) => {
           return structure.structureType == STRUCTURE_WALL && structure.hits < 10000;
         }
       });
-      if(targets.length > 0) {
+      if(target) {
         //creep.say("Repairing!");
-        creep.memory.target = targets[0];
-        if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
-          creep.moveTo(targets[0]);
+        creep.memory.target = target;
+        if(creep.repair(target) == ERR_NOT_IN_RANGE) {
+          creep.moveTo(target);
         }
       }
-      else if (!targets) {
-        var targets = creep.room.find(FIND_STRUCTURES, {
+      else if (!target) {
+        var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
           filter: (structure) => {
             return structure.structureType == STRUCTURE_RAMPART && structure.hits < 10000;
           }
         });
-        if(targets.length > 0) {
+        if(target) {
           //creep.say("Repairing!");
-          creep.memory.target = targets[0];
-          if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
-            creep.moveTo(targets[0]);
+          creep.memory.target = target;
+          if(creep.repair(target) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(target);
           }
         }
       }
-      else if (!targets) {
-        var targets = creep.room.find(FIND_STRUCTURES, {
+      else if (!target) {
+        var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
           filter: (structure) => {
             return structure.hits < (structure.hitsMax / 2);
           }
         });
-        if(targets.length > 0) {
+        if(target) {
           //creep.say("Repairing!");
-          creep.memory.target = targets[0];
-          if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
-            creep.moveTo(targets[0]);
+          creep.memory.target = target;
+          if(creep.repair(target) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(target);
           }
         }
       }
@@ -61,18 +61,18 @@ var roleRepairer = {
     }
     //If creep needs to gather energy
     else if (creep.memory.repairing == false) {
-      var withdrawTargets = creep.room.find(FIND_STRUCTURES, {
+      var withdrawTarget = creep.pos.findClosestByPath(FIND_STRUCTURES, {
         filter: (structure) => {
           return (structure.structureType == STRUCTURE_CONTAINER ||
             structure.structureType == STRUCTURE_STORAGE) &&
             structure.store[RESOURCE_ENERGY] > 100;
         }
       });
-      if (withdrawTargets.length > 0) {
+      if (withdrawTarget) {
         //creep.say("Withdrawing energy!");
-        creep.memory.target = withdrawTargets[0];
-        if (creep.withdraw(withdrawTargets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-          creep.moveTo(withdrawTargets[0]);
+        creep.memory.target = withdrawTarget;
+        if (creep.withdraw(withdrawTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+          creep.moveTo(withdrawTarget);
         }
       }
       else {
