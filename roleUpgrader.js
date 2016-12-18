@@ -23,16 +23,16 @@ var roleUpgrader = {
     //If creep needs to gather energy
     else if (creep.memory.upgrading == false) {
       //creep.say("Withdrawing energy!");
-      var withdrawTargets = creep.room.find(FIND_STRUCTURES, {
+      var withdrawTarget = creep.pos.findClosestByPath(FIND_STRUCTURES, {
         filter: (structure) => {
           return (structure.structureType == STRUCTURE_CONTAINER ||
             structure.structureType == STRUCTURE_STORAGE) && structure.store[RESOURCE_ENERGY] > 100;
         }
       });
-      if (withdrawTargets.length > 0) {
-        creep.memory.target = withdrawTargets[0];
-        if (creep.withdraw(withdrawTargets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-          creep.moveTo(withdrawTargets[0]);
+      if (withdrawTarget) {
+        creep.memory.target = withdrawTarget;
+        if (creep.withdraw(withdrawTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+          creep.moveTo(withdrawTarget);
         }
       }
       else {
