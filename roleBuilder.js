@@ -27,7 +27,7 @@ var roleBuilder = {
         var targets = creep.room.find(FIND_STRUCTURES, {
           filter: (structure) => {
             return structure.structureType == STRUCTURE_RAMPART &&
-              structure.hits < 2000;
+              structure.hits < 5000;
           }
         });
         if (targets.length > 0) {
@@ -43,7 +43,7 @@ var roleBuilder = {
         var targets = creep.room.find(FIND_STRUCTURES, {
           filter: (structure) => {
             return structure.structureType == STRUCTURE_WALL &&
-              structure.hits < 2000;
+              structure.hits < 5000;
           }
         });
         if (targets.length > 0) {
