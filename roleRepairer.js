@@ -16,17 +16,7 @@ var roleRepairer = {
   	if(creep.memory.repairing == true) {
   	  var targets = creep.room.find(FIND_STRUCTURES, {
         filter: (structure) => {
-          for(potential in structure) {
-            if ((potential.structureType == STRUCTURE_WALL || potential.structureType == STRUCTURE_RAMPART) && potential.hits < 10000) {
-                return potential;
-              }
-            else if ((potential.structureType != STRUCTURE_WALL || potential.structureType != STRUCTURE_RAMPART) && structure.hits < (structure.hitsMax / 2)) {
-              return potential;
-            }
-            else {
-              return potential;
-            }
-          }
+          return structure.structureType == STRUCTURE_WALL && structure.hits < 10000;
         }
       });
       if(targets.length > 0) {
@@ -34,6 +24,34 @@ var roleRepairer = {
         creep.memory.target = targets[0];
         if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
           creep.moveTo(targets[0]);
+        }
+      }
+      else if (!targets) {
+        var targets = creep.room.find(FIND_STRUCTURES, {
+          filter: (structure) => {
+            return structure.structureType == STRUCTURE_RAMPART && structure.hits < 10000;
+          }
+        });
+        if(targets.length > 0) {
+          //creep.say("Repairing!");
+          creep.memory.target = targets[0];
+          if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(targets[0]);
+          }
+        }
+      }
+      else if (!targets) {
+        var targets = creep.room.find(FIND_STRUCTURES, {
+          filter: (structure) => {
+            return structure.hits < (structure.hitsMax / 2);
+          }
+        });
+        if(targets.length > 0) {
+          //creep.say("Repairing!");
+          creep.memory.target = targets[0];
+          if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(targets[0]);
+          }
         }
       }
       else {
