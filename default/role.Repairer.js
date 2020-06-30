@@ -92,7 +92,7 @@ module.exports = {
       }
       //Look for Dropped Energy
       else if (!target) {
-        target = creep.pos.findClosestByPath(FIND_DROPPED_ENERGY, {
+        target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES, {
           filter: r => (r.resourceType === RESOURCE_ENERGY && r.amount > 100)
         });
         if(target) {
