@@ -103,7 +103,8 @@ module.exports.loop = function () {
     //Desired number of creeps calulation per role
 
     //Harvester target number is equal to number of sources the spawn is responsible for
-    var harvesterTargetNum = 2;
+    //var harvesterTargetNum = 2;
+    var harvesterTargetNum = spawn.memory.sources.length
 
     //Upgrader target number
     var upgraderTargetNum = spawn.room.controller.level;

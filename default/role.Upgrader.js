@@ -35,22 +35,22 @@ module.exports = {
           creep.moveTo(target);
         }
       }
-      //Look for Dropped Energy
+      //Look for containers
       else if (!target) {
-        target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES, {
-          filter: r => (r.resourceType === RESOURCE_ENERGY && r.amount > 100)
+        target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+          filter: (structure) => {
+            return (structure.structureType === STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] >= creep.store.getCapacity(RESOURCE_ENERGY));
+          }
         });
         if(target) {
-          if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
+          if(creep.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
             creep.moveTo(target);
           }
         }
-        //Look for containers
+        //Look for Dropped Energy
         else if (!target) {
-          target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-            filter: (structure) => {
-              return (structure.structureType === STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] >= creep.store.getCapacity(RESOURCE_ENERGY));
-            }
+          target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES, {
+            filter: r => (r.resourceType === RESOURCE_ENERGY && r.amount > 100)
           });
           if(target) {
             if(creep.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {

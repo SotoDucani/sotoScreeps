@@ -20,7 +20,7 @@ module.exports = {
         filter: (structure) => {
           return (structure.structureType === STRUCTURE_EXTENSION ||
             structure.structureType === STRUCTURE_SPAWN || structure.structureType === STRUCTURE_TOWER) &&
-            structure.energy < structure.energyCapacity;
+            structure.store[RESOURCE_ENERGY] < structure.store.getCapacity(RESOURCE_ENERGY);
         }
       });
       if(target) {
@@ -31,12 +31,19 @@ module.exports = {
       else if (!target) {
         target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
           filter: (structure) => {
-            return structure.structureType === STRUCTURE_STORAGE && structure.store[RESOURCE_ENERGY] < structure.storeCapacity;
+            return structure.structureType === STRUCTURE_STORAGE && structure.store[RESOURCE_ENERGY] < structure.store.getCapacity(RESOURCE_ENERGY);
           }
         });
         if (target) {
           if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
             creep.moveTo(target);
+          }
+        } else if (!target) {
+          target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
+          if (target) {
+            if(creep.build(target) === ERR_NOT_IN_RANGE) {
+              creep.moveTo(target);
+            }
           }
         }
       }
@@ -46,7 +53,7 @@ module.exports = {
 
     //If it has no energy
     else if (creep.memory.working === false) {
-      var target = creep.pos.findClosestByPath(FIND_DROPPED_ENERGY, {
+      var target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES, {
         filter: r => (r.resourceType === RESOURCE_ENERGY && r.amount > 100)
       });
       if (target) {
@@ -57,12 +64,24 @@ module.exports = {
       else if (!target) {
         var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
           filter: function(structure) {
-            return (structure.structureType === STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > 50);
+            return (structure.structureType === STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > 1000);
           }
         });
         if (target) {
           if (creep.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
             creep.moveTo(target);
+          }
+        }
+        else if (!target) {
+          var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+            filter: function(structure) {
+              return (structure.structureType === STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > creep.store.getCapacity(RESOURCE_ENERGY));
+            }
+          });
+          if (target) {
+            if (creep.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+              creep.moveTo(target);
+            }
           }
         }
       }
