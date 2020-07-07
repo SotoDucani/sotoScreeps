@@ -4,7 +4,7 @@ module.exports = function () {
 
       var containers = this.room.find(FIND_STRUCTURES, {filter: {structureType: STRUCTURE_CONTAINER}});
 
-      if (roleName === "harvester" && this.room.energyAvailable < 700 && this.room.energyCapacityAvailable >= 500){
+      if (roleName === "harvester" && this.room.energyAvailable < 700 && this.room.energyAvailable >= 500){
         return this.createCreep([WORK,WORK,WORK,WORK,CARRY,MOVE], undefined, {role: roleName, working: false});
       }
       else if (roleName === "harvester" && this.room.energyAvailable >= 700) {
