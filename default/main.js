@@ -113,7 +113,7 @@ module.exports.loop = function () {
     }
 
     //Builder target number
-    var builderTargetNum = spawn.room.controller.level;
+    var builderTargetNum = 2;
     if (spawn.room.controller.level >= 4) {
       builderTargetNum = 4
     }
@@ -121,7 +121,7 @@ module.exports.loop = function () {
     //Repairer target number
     var repairerTargetNum = 0;
     if (spawn.room.controller.level > 1 && spawn.room.controller.level < 4) {
-      repairerTargetNum = spawn.room.controller.level;
+      repairerTargetNum = 2;
     }
     else if (spawn.room.controller.level >= 4) {
       repairerTargetNum = 4;

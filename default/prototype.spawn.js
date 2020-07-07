@@ -4,19 +4,19 @@ module.exports = function () {
 
       var containers = this.room.find(FIND_STRUCTURES, {filter: {structureType: STRUCTURE_CONTAINER}});
 
-      if (roleName === "harvester" && this.room.energyCapacityAvailable < 700 && this.room.energyCapacityAvailable >= 500){
+      if (roleName === "harvester" && this.room.energyAvailable < 700 && this.room.energyCapacityAvailable >= 500){
         return this.createCreep([WORK,WORK,WORK,WORK,CARRY,MOVE], undefined, {role: roleName, working: false});
       }
-      else if (roleName === "harvester" && this.room.energyCapacityAvailable >= 700) {
+      else if (roleName === "harvester" && this.room.energyAvailable >= 700) {
         return this.createCreep([WORK,WORK,WORK,WORK,WORK,CARRY,MOVE,MOVE,MOVE], undefined, {role: roleName, working: false});
       }
       else if (roleName === "harvester") {
         return this.createCreep([WORK,WORK,MOVE,CARRY], undefined, {role: roleName, working: false});
       }
-      else if (roleName === "mover" && this.room.energyCapacityAvailable <= 800) {
+      else if (roleName === "mover" && this.room.energyAvailable <= 800) {
         return this.createCreep([CARRY,CARRY,CARRY,CARRY,CARRY,WORK,MOVE,MOVE,MOVE], undefined, {role: roleName, working: false});
       }
-      else if (roleName === "mover" && this.room.energyCapacityAvailable > 800) {
+      else if (roleName === "mover" && this.room.energyAvailable > 800) {
         return this.createCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,WORK,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], undefined, {role: roleName, working: false});
       }
       else {

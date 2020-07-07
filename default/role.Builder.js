@@ -29,10 +29,10 @@ module.exports = {
         }
       }
       else if (!target) {
-        target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
-        if (target) {
-          if(creep.build(target) === ERR_NOT_IN_RANGE) {
-            creep.moveTo(target);
+        target = creep.room.find(FIND_CONSTRUCTION_SITES);
+        if (target[0]) {
+          if(creep.build(target[0]) === ERR_NOT_IN_RANGE) {
+            creep.moveTo(target[0]);
           }
         }
         else if (!target) {
