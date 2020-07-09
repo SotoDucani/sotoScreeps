@@ -5,6 +5,7 @@ var roleUpgrader = require('role.Upgrader');
 var roleBuilder = require('role.Builder');
 var roleRepairer = require('role.Repairer');
 var roleMover = require('role.Mover');
+var roleTower = require('role.Tower');
 
 module.exports.loop = function () {
   //Look for dead creeps and remove from memory
@@ -47,6 +48,23 @@ module.exports.loop = function () {
       }
     }
 
+    //Make Towers do things
+    var hostiles = spawn.room.find(FIND_HOSTILE_CREEPS);
+    var towers = spawn.room.find(FIND_MY_STRUCTURES, {
+      filter: {
+        structureType: STRUCTURE_TOWER
+      }
+    });
+
+    for (var t in towers) {
+      var cur = towers[t];
+
+      if (hostiles.length > 0) {
+        roleTower.run(cur,"attack");
+      } else {
+        roleTower.run(cur,"repair");
+      }
+    }
     //------------------------------
 
     //Hacky Tower attack code
@@ -108,29 +126,29 @@ module.exports.loop = function () {
 
     //Upgrader target number
     var upgraderTargetNum = spawn.room.controller.level;
-    if (spawn.room.controller.level >= 4) {
-      upgraderTargetNum = 4
+    if (spawn.room.controller.level >= 2) {
+      upgraderTargetNum = 2
     }
 
     //Builder target number
     var builderTargetNum = 2;
     if (spawn.room.controller.level >= 4) {
-      builderTargetNum = 4
+      builderTargetNum = 2
     }
 
     //Repairer target number
     var repairerTargetNum = 0;
     if (spawn.room.controller.level > 1 && spawn.room.controller.level < 4) {
-      repairerTargetNum = 2;
+      repairerTargetNum = 1;
     }
-    else if (spawn.room.controller.level >= 4) {
-      repairerTargetNum = 4;
+    else if (spawn.room.controller.level >= 2) {
+      repairerTargetNum = 1;
     }
 
     //Mover target number
     var moverTargetNum = 0;
     if (spawn.room.controller.level > 2) {
-      moverTargetNum = spawn.memory.sources.length * 2;
+      moverTargetNum = 2;
     }
 
     //------------------------------
