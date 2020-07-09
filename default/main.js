@@ -60,28 +60,12 @@ module.exports.loop = function () {
       var cur = towers[t];
 
       if (hostiles.length > 0) {
-        roleTower.run(cur,"attack");
+        roleTower.run(cur,"attack",hostiles);
       } else {
         roleTower.run(cur,"repair");
       }
     }
-    //------------------------------
-
-    //Hacky Tower attack code
-    //var hostiles = Game.spawns.Home.room.find(FIND_HOSTILE_CREEPS);
-    //if(hostiles.length > 0) {
-    //  var username = hostiles[0].owner.username;
-    //  Game.notify(`User ${username} spotted in Spawn1`);
-    //  var towers = Game.spawns.Spawn1.room.find(FIND_MY_STRUCTURES, {
-    //    filter: {
-    //      structureType: STRUCTURE_TOWER
-    //    }
-    //  });
-    //  towers.forEach(tower => tower.attack(hostiles[0]));
-    //}
-
-    //------------------------------
-
+    
     //If a new spawn, find available sources in room
     if (spawn.memory.isOld === false) {
       var sources = spawn.room.find(FIND_SOURCES)
@@ -96,7 +80,7 @@ module.exports.loop = function () {
     //------------------------------
 
     //Get the current available energy of the spawn + it's extensions
-    var availEnergy = spawn.room.energyCapacityAvailable;
+    var availEnergy = spawn.room.energyAvailable;
 
     //------------------------------
 
@@ -186,56 +170,57 @@ module.exports.loop = function () {
         console.log("Spawned new harvester: " + name + "; Assgned to : " + newCreep.memory.assignedSource);
       }
     }
-
-    //If not enough Builders
-    else if (buildersNum < builderTargetNum) {
-      //Attempt to spawn one
-      name = spawn.createCustomCreep(availEnergy, 'builder')
-      //If the spawn is successful
-      if (!(name < 0)) {
-        var newCreep = Game.creeps[name];
-        //Create memory locations
-        newCreep.memory.homeSpawn = spawn.id;
-        console.log("Spawned new builder: " + name);
+    if (availEnergy > 300) {
+      //If not enough Builders
+      if (buildersNum < builderTargetNum) {
+        //Attempt to spawn one
+        name = spawn.createCustomCreep(availEnergy, 'builder')
+        //If the spawn is successful
+        if (!(name < 0)) {
+          var newCreep = Game.creeps[name];
+          //Create memory locations
+          newCreep.memory.homeSpawn = spawn.id;
+          console.log("Spawned new builder: " + name);
+        }
       }
-    }
 
-    //If not enough Movers
-    else if (moversNum < moverTargetNum) {
-      //Attempt to spawn one
-      name = spawn.createCustomCreep(availEnergy, 'mover')
-      //If the spawn is successful
-      if (!(name < 0)) {
-        var newCreep = Game.creeps[name];
-        //Create memory locations
-        newCreep.memory.homeSpawn = spawn.id;
-        console.log("Spawned new mover: " + name);
+      //If not enough Movers
+      else if (moversNum < moverTargetNum) {
+        //Attempt to spawn one
+        name = spawn.createCustomCreep(availEnergy, 'mover')
+        //If the spawn is successful
+        if (!(name < 0)) {
+          var newCreep = Game.creeps[name];
+          //Create memory locations
+          newCreep.memory.homeSpawn = spawn.id;
+          console.log("Spawned new mover: " + name);
+        }
       }
-    }
 
-    //If not enough Upgraders
-    else if (upgradersNum < upgraderTargetNum) {
-      //Attempt to spawn one
-      name = spawn.createCustomCreep(availEnergy, 'upgrader')
-      //If the spawn is successful
-      if (!(name < 0)) {
-        var newCreep = Game.creeps[name];
-        //Create memory locations
-        newCreep.memory.homeSpawn = spawn.id;
-        console.log("Spawned new upgrader: " + name);
+      //If not enough Upgraders
+      else if (upgradersNum < upgraderTargetNum) {
+        //Attempt to spawn one
+        name = spawn.createCustomCreep(availEnergy, 'upgrader')
+        //If the spawn is successful
+        if (!(name < 0)) {
+          var newCreep = Game.creeps[name];
+          //Create memory locations
+          newCreep.memory.homeSpawn = spawn.id;
+          console.log("Spawned new upgrader: " + name);
+        }
       }
-    }
 
-    //If not enough Repairers
-    else if (repairersNum < repairerTargetNum) {
-      //Attempt to spawn one
-      name = spawn.createCustomCreep(availEnergy, 'repairer')
-      //If the spawn is successful
-      if (!(name < 0)) {
-        var newCreep = Game.creeps[name];
-        //Create memory locations
-        newCreep.memory.homeSpawn = spawn.id;
-        console.log("Spawned new repairer: " + name);
+      //If not enough Repairers
+      else if (repairersNum < repairerTargetNum) {
+        //Attempt to spawn one
+        name = spawn.createCustomCreep(availEnergy, 'repairer')
+        //If the spawn is successful
+        if (!(name < 0)) {
+          var newCreep = Game.creeps[name];
+          //Create memory locations
+          newCreep.memory.homeSpawn = spawn.id;
+          console.log("Spawned new repairer: " + name);
+        }
       }
     }
   }
