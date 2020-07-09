@@ -75,7 +75,7 @@ module.exports = {
         else if (!target) {
           var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: function(structure) {
-              return (structure.structureType === STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > creep.store.getCapacity(RESOURCE_ENERGY));
+              return (structure.structureType === STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > 100);
             }
           });
           if (target) {
