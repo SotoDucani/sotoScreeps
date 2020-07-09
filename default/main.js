@@ -1,3 +1,5 @@
+/// <reference path="../ScreepsAutocomplete/_references.js" />
+
 //Import modules
 require('prototype.spawn')();
 var roleHarvester = require('role.Harvester');
