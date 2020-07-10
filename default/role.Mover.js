@@ -1,3 +1,5 @@
+/// <reference path="../ScreepsAutocomplete/_references.js" />
+
 module.exports = {
   run: function(creep) {
     //If creep is transfering and runs out of energy

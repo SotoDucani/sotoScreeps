@@ -1,3 +1,5 @@
+/// <reference path="../ScreepsAutocomplete/_references.js" />
+
 module.exports = {
   run: function(creep) {
     var buildingSites = creep.room.find(FIND_CONSTRUCTION_SITES);

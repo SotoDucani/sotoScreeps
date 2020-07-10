@@ -1,3 +1,5 @@
+/// <reference path="../ScreepsAutocomplete/_references.js" />
+
 module.exports = {
 
   getBody_Harvester: function(level) {

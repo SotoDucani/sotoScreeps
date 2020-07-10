@@ -1,3 +1,5 @@
+/// <reference path="../ScreepsAutocomplete/_references.js" />
+
 module.exports = {
   run: function(tower,mode,hostiles) {
     //Determine if we need to be in attack mode or not

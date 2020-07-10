@@ -1,3 +1,5 @@
+/// <reference path="../ScreepsAutocomplete/_references.js" />
+
 module.exports = function () {
   StructureSpawn.prototype.createCustomCreep =
     function(energy, roleName) {
