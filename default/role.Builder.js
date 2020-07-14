@@ -34,7 +34,7 @@ module.exports = {
         if (target[0]) {
           utilActions.creepBuildObject(creep,target[0]);
         }
-        else if (!target) {
+        else {
           utilActions.creepUpgradeController(creep,creep.room.controller);
         }
       }
