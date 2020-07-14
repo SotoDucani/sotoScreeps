@@ -1,10 +1,12 @@
 /// <reference path="../ScreepsAutocomplete/_references.js" />
 
+var utilActions = require('util.actions');
+
 module.exports = {
   run: function(tower,mode,hostiles) {
     //Determine if we need to be in attack mode or not
     if (mode === "attack") {
-      tower.attack(hostiles[0]);
+      utilActions.towerAttackObject(tower,hostiles[0]);
     } else if (mode === "repair") {
       //Find a repair target
       var target = tower.pos.findClosestByPath(FIND_STRUCTURES, {
@@ -13,9 +15,7 @@ module.exports = {
         }
       });
       if (target) {
-        if (tower.repair(target) === ERR_NOT_IN_RANGE) {
-        tower.moveTo(target);
-        }
+        utilActions.towerRepairObject(tower,target);
       } else if (!target) {
         target = tower.pos.findClosestByPath(FIND_STRUCTURES, {
           filter: (structure) => {
@@ -23,9 +23,7 @@ module.exports = {
           }
         });
         if (target) {
-          if (tower.repair(target) === ERR_NOT_IN_RANGE) {
-            tower.moveTo(target);
-          }
+          utilActions.towerRepairObject(tower,target);
         } else if (!target) {
           target = tower.pos.findClosestByPath(FIND_STRUCTURES, {
             filter: (structure) => {
@@ -33,9 +31,7 @@ module.exports = {
             }
           });
           if (target) {
-            if (tower.repair(target) === ERR_NOT_IN_RANGE) {
-            tower.moveTo(target);
-            }
+            utilActions.towerRepairObject(tower,target);
           } else if (!target) {
             target = tower.pos.findClosestByPath(FIND_STRUCTURES, {
               filter: (structure) => {
@@ -43,9 +39,7 @@ module.exports = {
               }
             });
             if (target) {
-              if (tower.repair(target) === ERR_NOT_IN_RANGE) {
-                tower.moveTo(target);
-              }
+              utilActions.towerRepairObject(tower,target);
             }
           }
         }

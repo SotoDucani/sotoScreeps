@@ -1,5 +1,7 @@
 /// <reference path="../ScreepsAutocomplete/_references.js" />
 
+var utilActions = require('util.actions');
+
 module.exports = {
   run: function(creep) {
       //Check for builders to move energy
@@ -18,9 +20,7 @@ module.exports = {
           }
         });
         if (target) {
-          if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-            creep.moveTo(target);
-          }
+          utilActions.creepTransferResource(creep,target,RESOURCE_ENERGY);
         }
       } else if (creep.store[RESOURCE_ENERGY] === creep.store.getCapacity(RESOURCE_ENERGY)) {
         var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
@@ -30,15 +30,11 @@ module.exports = {
           }
         });
         if (target) {
-          if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-            creep.moveTo(target);
-          }
+          utilActions.creepTransferResource(creep,target,RESOURCE_ENERGY);
         }
       }
       else if (assignedSource) {
-        if (creep.harvest(assignedSource) === ERR_NOT_IN_RANGE) {
-          creep.moveTo(assignedSource);
-        }
+        utilActions.creepHarvestObject(creep,assignedSource);
       }
 	}
 };
