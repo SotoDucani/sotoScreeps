@@ -45,7 +45,7 @@ module.exports = {
 
   creepUpgradeController: function(creep,controller) {
     if (creep.upgradeController(controller) === ERR_NOT_IN_RANGE) {
-      creep.moveTo(object);
+      creep.moveTo(controller);
     }
   },
 
