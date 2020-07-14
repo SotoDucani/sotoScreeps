@@ -1,8 +1,9 @@
 /// <reference path="../ScreepsAutocomplete/_references.js" />
 
+var utilActions = require('util.actions');
+
 module.exports = {
   run: function(creep) {
-    var buildingSites = creep.room.find(FIND_CONSTRUCTION_SITES);
 
     //If creep is transfering and runs out of energy
     if(creep.memory.working === true && creep.store[RESOURCE_ENERGY] === 0) {
@@ -19,9 +20,7 @@ module.exports = {
 
     //If creep needs to upgrade the controller
     if(creep.memory.working === true) {
-      if(creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(creep.room.controller);
-      }
+      utilActions.creepUpgradeController(creep,creep.room.controller);
     }
 
     //If creep needs to get more energy
@@ -33,9 +32,7 @@ module.exports = {
         }
       });
       if (target) {
-        if (creep.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-          creep.moveTo(target);
-        }
+        utilActions.creepWithdrawResource(creep,target,RESOURCE_ENERGY);
       }
       //Look for containers
       else if (!target) {
@@ -45,9 +42,7 @@ module.exports = {
           }
         });
         if(target) {
-          if(creep.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-            creep.moveTo(target);
-          }
+          utilActions.creepWithdrawResource(creep,target,RESOURCE_ENERGY);
         }
         //Look for Dropped Energy
         else if (!target) {
@@ -55,17 +50,13 @@ module.exports = {
             filter: r => (r.resourceType === RESOURCE_ENERGY && r.amount > 100)
           });
           if(target) {
-            if(creep.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-              creep.moveTo(target);
-            }
+            utilActions.creepWithdrawResource(creep,target,RESOURCE_ENERGY);
           }
           //Find nearest Source
           else if (!target) {
             target = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
             if(target) {
-              if (creep.harvest(target) === ERR_NOT_IN_RANGE) {
-                creep.moveTo(target);
-              }
+              utilActions.creepHarvestObject(creep,target);
             }
           }
         }
